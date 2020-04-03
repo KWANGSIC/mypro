@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var index2Router = require('./routes/index2');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -21,6 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/index2', index2Router);
+app.use('/login', loginRouter);
+
+
+//bootstrap
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
+
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
+app.use('/vendor', express.static(__dirname + '/node_modules/bootstrap/vendor')); // redirect CSS bootstrap
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
